@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 //styles
 import "stylesheets/index.css";
 //components
-import App from "pages/App";
+import App from "pages/App/App";
 //redux
 import { store } from "redux/store";
 

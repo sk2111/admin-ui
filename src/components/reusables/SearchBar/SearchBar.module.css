@@ -1,0 +1,12 @@
+.label {
+  display: block;
+  width: 100%;
+}
+.search {
+  border-radius: 0.6rem;
+  border: 1px solid var(--primary-border-color);
+  font-size: 1.5rem;
+  height: 4rem;
+  padding: 0 1.2rem;
+  width: 100%;
+}
