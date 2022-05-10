@@ -33,7 +33,7 @@ describe("SearchBar", () => {
     expect(screen.getByPlaceholderText(placeholderText).value).toEqual(value);
   });
 
-  it("Should reflect the user typed value", async () => {
+  it("should reflect the user typed value", async () => {
     render(
       <SearchBar
         id={id}
@@ -53,7 +53,7 @@ describe("SearchBar", () => {
     );
   });
 
-  it("Should invoke the callback with user typed value after debounce", async () => {
+  it("should invoke the callback with user typed value after debounce", async () => {
     const handleChange = jest.fn();
 
     render(
