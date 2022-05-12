@@ -7,12 +7,14 @@ import CheckBox from "./CheckBox";
 
 describe("CheckBox", () => {
   it("should render the checkbox with checked", () => {
-    render(<CheckBox checked={true} handleChange={() => {}} />);
+    const handleChange = jest.fn();
+    render(<CheckBox checked={true} handleChange={handleChange} />);
     expect(screen.getByTestId("checkbox")).toBeChecked();
   });
 
   it("should render the checkbox with not checked", () => {
-    render(<CheckBox checked={false} handleChange={() => {}} />);
+    const handleChange = jest.fn();
+    render(<CheckBox checked={false} handleChange={handleChange} />);
     expect(screen.getByTestId("checkbox")).not.toBeChecked();
   });
 

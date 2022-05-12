@@ -17,13 +17,14 @@ describe("SearchBar", () => {
   const { id, placeholderText, userTypedValue, debounceTimeInMs, value } = mock;
 
   it("should render the placeholder text and default input value", () => {
+    const handleChange = jest.fn();
     render(
       <SearchBar
         id={id}
         placeholder={placeholderText}
         debounceTimeInMs={debounceTimeInMs}
         value={value}
-        handleChange={() => {}}
+        handleChange={handleChange}
       />,
     );
 
@@ -34,13 +35,14 @@ describe("SearchBar", () => {
   });
 
   it("should reflect the user typed value", async () => {
+    const handleChange = jest.fn();
     render(
       <SearchBar
         id={id}
         placeholder={placeholderText}
         debounceTimeInMs={debounceTimeInMs}
         value=""
-        handleChange={() => {}}
+        handleChange={handleChange}
       />,
     );
 
