@@ -1,0 +1,21 @@
+.button {
+  border: none;
+  border-radius: 1rem;
+  color: var(--primary-text-color);
+  cursor: pointer;
+  font-weight: bold;
+  min-height: 4rem;
+  min-width: 4rem;
+  padding: 1.2rem;
+  position: relative;
+  top: 0rem;
+}
+.button:active {
+  top: 0.15rem;
+}
+.button[data-theme="primary"] {
+  background-color: var(--btn-bg-primary);
+}
+.button[data-theme="danger"] {
+  background-color: var(--btn-bg-danger);
+}
