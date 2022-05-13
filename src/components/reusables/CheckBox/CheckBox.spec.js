@@ -9,20 +9,20 @@ describe("CheckBox", () => {
   it("should render the checkbox with checked", () => {
     const handleChange = jest.fn();
     render(<CheckBox checked={true} handleChange={handleChange} />);
-    expect(screen.getByTestId("checkbox")).toBeChecked();
+    expect(screen.getByRole("checkbox")).toBeChecked();
   });
 
   it("should render the checkbox with not checked", () => {
     const handleChange = jest.fn();
     render(<CheckBox checked={false} handleChange={handleChange} />);
-    expect(screen.getByTestId("checkbox")).not.toBeChecked();
+    expect(screen.getByRole("checkbox")).not.toBeChecked();
   });
 
   it("should invoke the callback with current checked value", async () => {
     const handleChange = jest.fn();
     render(<CheckBox checked={false} handleChange={handleChange} />);
 
-    const checkBoxRef = screen.getByTestId("checkbox");
+    const checkBoxRef = screen.getByRole("checkbox");
     await userEvent.click(checkBoxRef);
     expect(handleChange).toBeCalledWith(true);
   });

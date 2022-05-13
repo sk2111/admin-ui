@@ -6,7 +6,7 @@ import styles from "./CheckBox.module.css";
 const CheckBox = ({ checked, handleChange }) => {
   return (
     <input
-      data-testid="checkbox"
+      aria-label="checkbox"
       className={styles.checkBox}
       type="checkbox"
       checked={checked}
