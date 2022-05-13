@@ -32,7 +32,7 @@ describe("Button", () => {
     );
 
     expect(screen.getByRole("button").getAttribute("data-theme")).toBe(
-      "danger",
+      mock.themeDanger,
     );
   });
 
