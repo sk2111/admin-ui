@@ -6,13 +6,7 @@ import styles from "./SearchBar.module.css";
 //hooks
 import useDebounce from "hooks/useDebounce";
 
-const SearchBar = ({
-  id,
-  placeholder,
-  debounceTimeInMs,
-  value,
-  handleChange,
-}) => {
+const SearchBar = ({ placeholder, debounceTimeInMs, value, handleChange }) => {
   const [searchTerm, setSearchTerm] = useState(value);
   const debouncedSearchTerm = useDebounce(searchTerm, debounceTimeInMs);
 
@@ -23,21 +17,18 @@ const SearchBar = ({
   }, [debouncedSearchTerm, value, handleChange]);
 
   return (
-    <label htmlFor={id} className={styles.label}>
-      <input
-        id={id}
-        className={styles.search}
-        type="text"
-        placeholder={placeholder}
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-    </label>
+    <input
+      aria-label={placeholder}
+      className={styles.search}
+      type="text"
+      placeholder={placeholder}
+      value={searchTerm}
+      onChange={({ target }) => setSearchTerm(target.value)}
+    />
   );
 };
 
 SearchBar.propTypes = {
-  id: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   debounceTimeInMs: PropTypes.number.isRequired,
   value: PropTypes.string.isRequired,
