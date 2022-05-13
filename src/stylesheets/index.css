@@ -15,4 +15,7 @@ body {
 :root {
   font-size: 62.5%;
   --primary-border-color: #d7d7d7;
+  --primary-text-color: #ffffff;
+  --btn-bg-primary: #1451c2;
+  --btn-bg-danger: #e11d00;
 }
