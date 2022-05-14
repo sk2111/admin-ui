@@ -4,17 +4,18 @@ import { pagination } from "config/constants";
 const { pageOffset, recordsPerPage } = pagination;
 
 const checkStringIncludes = (str, toMatch) => {
-  return str.toLowerCase().includes(toMatch.toLowerCase());
+  return str.trim().toLowerCase().includes(toMatch.trim().toLowerCase());
 };
 
 export const getFilteredUsers = (searchTerm, users) => {
   const entities = {};
   const ids = users.ids.filter((id) => {
     const { name, email, role } = users.entities[id];
-    const nameMatch = checkStringIncludes(name, searchTerm);
-    const emailMatch = checkStringIncludes(email, searchTerm);
-    const roleMatch = checkStringIncludes(role, searchTerm);
-    return nameMatch || emailMatch || roleMatch;
+    return (
+      checkStringIncludes(name, searchTerm) ||
+      checkStringIncludes(email, searchTerm) ||
+      checkStringIncludes(role, searchTerm)
+    );
   });
   ids.forEach((id) => (entities[id] = users.entities[id]));
   return { ids, entities };

@@ -54,12 +54,14 @@ export const userSlice = createSlice({
       state.users.entities[id].selected = value;
     },
     deleteUsers: (state, action) => {
-      const userToDelete = action.payload;
-      delete state.users.entities[userToDelete];
-      const idx = state.users.ids.findIndex((id) => id === userToDelete);
-      if (idx !== -1) {
-        state.users.ids.splice(idx, 1);
-      }
+      const usersToDelete = action.payload;
+      usersToDelete.forEach((userToDelete) => {
+        delete state.users.entities[userToDelete];
+        const idx = state.users.ids.findIndex((id) => id === userToDelete);
+        if (idx !== -1) {
+          state.users.ids.splice(idx, 1);
+        }
+      });
     },
   },
   extraReducers: (builder) => {

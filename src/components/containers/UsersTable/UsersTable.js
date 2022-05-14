@@ -43,7 +43,7 @@ const UsersTable = ({ users, handleDelete, handleUserSelect }) => {
                   className={styles.action}
                   src={deleteImgSrc}
                   alt="delete"
-                  onClick={() => handleDelete(id)}
+                  onClick={() => handleDelete([id])}
                 />
               </td>
             </tr>
