@@ -15,4 +15,5 @@ export const pagination = {
     disabled: "disabled",
     none: "none",
   },
+  recordsPerPage: 10,
 };
