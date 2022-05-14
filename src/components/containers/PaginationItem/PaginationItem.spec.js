@@ -50,6 +50,6 @@ describe("PaginationItem", () => {
     );
 
     await userEvent.click(screen.getByRole("button"));
-    expect(handleClick).toBeCalledTimes(1);
+    expect(handleClick).toBeCalledTimes(0);
   });
 });
