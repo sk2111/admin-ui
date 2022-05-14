@@ -1,5 +1,5 @@
 .item {
-  margin-right: 1.3rem;
+  margin: 0.5rem 0.7rem;
 }
 .button {
   background-color: var(--btn-bg-primary);
