@@ -9,7 +9,7 @@ import CheckBox from "components/reusables/CheckBox/CheckBox";
 import editImgSrc from "assests/edit.png";
 import deleteImgSrc from "assests/delete.png";
 
-const UsersTable = ({ users, handleDelete }) => {
+const UsersTable = ({ users, handleDelete, handleUserSelect }) => {
   return (
     <table className={styles.table}>
       <thead>
@@ -29,7 +29,10 @@ const UsersTable = ({ users, handleDelete }) => {
           return (
             <tr key={id}>
               <td>
-                <CheckBox />
+                <CheckBox
+                  checked={user.selected}
+                  handleChange={(value) => handleUserSelect(id, value)}
+                />
               </td>
               <td>{user.name}</td>
               <td>{user.email}</td>
@@ -54,6 +57,7 @@ const UsersTable = ({ users, handleDelete }) => {
 UsersTable.propTypes = {
   users: PropTypes.object.isRequired,
   handleDelete: PropTypes.func.isRequired,
+  handleUserSelect: PropTypes.func.isRequired,
 };
 
 export default UsersTable;
