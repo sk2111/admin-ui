@@ -4,14 +4,15 @@ export const app = {
 };
 
 export const pagination = {
-  firstPage: "<<",
-  previousPage: "<",
-  nextPage: ">",
-  lastPage: ">>",
+  firstPageText: "<<",
+  previousPageText: "<",
+  nextPageText: ">",
+  lastPageText: ">>",
   pageOffset: 1,
-};
-
-export const paginationState = {
-  active: "active",
-  disabled: "disabled",
+  firstPage: 1,
+  state: {
+    active: "active",
+    disabled: "disabled",
+    none: "none",
+  },
 };
