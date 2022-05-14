@@ -1,9 +1,11 @@
-import { mockUsers, test } from "../mocks/mock.data";
 import {
   checkStringIncludes,
   getFilteredUsers,
   getDisplayUsers,
 } from "redux/helpers";
+//constants
+import { mockUsers, test } from "../mocks/mock.data";
+import { pagination } from "config/constants";
 
 describe("helpers", () => {
   it("Should compare two string without case sensitivity & trim whitespace", () => {
@@ -40,7 +42,7 @@ describe("helpers", () => {
   it("should return the user list filtered by search term role admin", () => {
     const filteredList = getFilteredUsers(test.roleAdmin, mockUsers);
 
-    expect(filteredList.ids.length).toEqual(3);
+    expect(filteredList.ids.length).toEqual(test.roleAdminCount);
     filteredList.ids.forEach((id) => {
       expect(filteredList.entities[id].role).toEqual(test.roleAdmin);
     });
@@ -49,9 +51,17 @@ describe("helpers", () => {
   it("should return the user list filtered by search term role member", () => {
     const filteredList = getFilteredUsers(test.roleMember, mockUsers);
 
-    expect(filteredList.ids.length).toEqual(7);
+    expect(filteredList.ids.length).toEqual(test.roleMemberCount);
     filteredList.ids.forEach((id) => {
       expect(filteredList.entities[id].role).toEqual(test.roleMember);
     });
+  });
+
+  it("should return the display users with correct pagination", () => {
+    const displayUsers = getDisplayUsers(test.currentPage, mockUsers);
+
+    expect(displayUsers.ids.length).toEqual(pagination.recordsPerPage);
+    expect(displayUsers.allSelected).toEqual(false);
+    expect(displayUsers.totalPages).toEqual(test.totalPages);
   });
 });

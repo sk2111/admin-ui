@@ -1,5 +1,5 @@
 export const mockUsers = {
-  ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
   entities: {
     1: {
       id: 1,
@@ -61,6 +61,30 @@ export const mockUsers = {
       email: "sarah@mailinator.com",
       role: "admin",
     },
+    11: {
+      id: 11,
+      name: "Keshav Muddaiah",
+      email: "keshav@mailinator.com",
+      role: "member",
+    },
+    12: {
+      id: 12,
+      name: "Nita Ramesh",
+      email: "nita@mailinator.com",
+      role: "member",
+    },
+    13: {
+      id: 13,
+      name: "Julia Hunstman",
+      email: "julia@mailinator.com",
+      role: "member",
+    },
+    14: {
+      id: 14,
+      name: "Juan Alonso",
+      email: "juan@mailinator.com",
+      role: "admin",
+    },
   },
 };
 
@@ -69,4 +93,8 @@ export const test = {
   name: "Sarah Potter",
   roleAdmin: "admin",
   roleMember: "member",
+  roleAdminCount: 4,
+  roleMemberCount: 10,
+  currentPage: 1,
+  totalPages: 2,
 };
