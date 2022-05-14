@@ -25,6 +25,7 @@ button {
   border: none;
   border-radius: 1rem;
   cursor: pointer;
+  font-size: 1.5rem;
   font-weight: bold;
   min-width: 4rem;
   min-height: 4rem;

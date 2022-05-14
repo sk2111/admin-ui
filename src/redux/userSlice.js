@@ -78,10 +78,11 @@ export default userSlice.reducer;
 
 //helpers
 const getDisplayUsers = (currentPage, users) => {
+  const entities = {};
   const startIdx = (currentPage - pageOffset) * recordsPerPage;
   const endIdx = startIdx + recordsPerPage;
   const ids = users.ids.slice(startIdx, endIdx);
-  const entities = ids.map((id) => users.entities[id]);
+  ids.forEach((id) => (entities[id] = users.entities[id]));
   return { ids, entities };
 };
 

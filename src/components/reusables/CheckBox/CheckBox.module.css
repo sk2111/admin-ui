@@ -1,4 +1,5 @@
 .checkBox {
+  cursor: pointer;
   height: 1.7rem;
   width: 1.7rem;
 }
