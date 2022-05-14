@@ -27,9 +27,11 @@ export const getDisplayUsers = (currentPage, users) => {
   const endIdx = startIdx + recordsPerPage;
   const ids = users.ids.slice(startIdx, endIdx);
   ids.forEach((id) => (entities[id] = users.entities[id]));
+  const allSelected = ids.every((id) => entities[id].selected);
   return {
     ids,
     entities,
+    allSelected,
     totalPages: Math.ceil(users.ids.length / recordsPerPage),
   };
 };
