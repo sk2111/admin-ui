@@ -1,0 +1,37 @@
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.table th {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: left;
+  padding-right: 10px;
+}
+.table tr {
+  border-bottom: 1px solid var(--border-color-primary);
+  height: 6rem;
+}
+.table td {
+  font-size: 1.4rem;
+  text-transform: capitalize;
+  font-weight: 400;
+  padding-right: 1.5rem;
+}
+.checkboxCol {
+  width: 20%;
+}
+.nameCol,
+.emailCol {
+  width: 30%;
+}
+.roleCol,
+.actionCol {
+  width: 10%;
+}
+.action {
+  cursor: pointer;
+  height: 2rem;
+  margin-right: 1.2rem;
+  width: 2rem;
+}
