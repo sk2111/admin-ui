@@ -1,0 +1,18 @@
+.item {
+  margin-right: 1.3rem;
+}
+.button {
+  background-color: var(--btn-bg-primary);
+  border-radius: 50%;
+  color: var(--text-color-primary);
+  user-select: none;
+}
+.active {
+  background-color: var(--btn-bg-secondary);
+  border: 1px solid var(--border-color-secondary);
+  color: var(--text-color-secondary);
+}
+.disabled {
+  background-color: var(--btn-bg-disabled);
+  pointer-events: none;
+}
