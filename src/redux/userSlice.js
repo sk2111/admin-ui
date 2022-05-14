@@ -4,10 +4,8 @@ import {
   createDraftSafeSelector,
   createSlice,
 } from "@reduxjs/toolkit";
-//constants
-import { pagination } from "config/constants";
-
-const { pageOffset, recordsPerPage } = pagination;
+//helpers
+import { getDisplayUsers, getFilteredUsers } from "./helpers";
 
 //initialState for user reducer
 const initialState = {
@@ -88,16 +86,6 @@ export const userActions = userSlice.actions;
 //reducer
 export default userSlice.reducer;
 
-//helpers
-const getDisplayUsers = (currentPage, users) => {
-  const entities = {};
-  const startIdx = (currentPage - pageOffset) * recordsPerPage;
-  const endIdx = startIdx + recordsPerPage;
-  const ids = users.ids.slice(startIdx, endIdx);
-  ids.forEach((id) => (entities[id] = users.entities[id]));
-  return { ids, entities };
-};
-
 //selectors
 const selectuser = (state) => state.user;
 
@@ -115,8 +103,7 @@ export const selectDisplayUsers = createDraftSafeSelector(
   selectuser,
   ({ searchTerm, currentPage, users }) => {
     return {
-      ...getDisplayUsers(currentPage, users),
-      totalPages: Math.ceil(users.ids.length / recordsPerPage),
+      ...getDisplayUsers(currentPage, getFilteredUsers(searchTerm, users)),
     };
   },
 );
