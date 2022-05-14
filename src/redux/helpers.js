@@ -3,7 +3,7 @@ import { pagination } from "config/constants";
 
 const { pageOffset, recordsPerPage } = pagination;
 
-const checkStringIncludes = (str, toMatch) => {
+export const checkStringIncludes = (str, toMatch) => {
   return str.trim().toLowerCase().includes(toMatch.trim().toLowerCase());
 };
 
