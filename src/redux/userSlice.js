@@ -49,6 +49,10 @@ export const userSlice = createSlice({
     updateCurrentPage: (state, action) => {
       state.currentPage = action.payload;
     },
+    updateUsersEdit: (state, action) => {
+      const { id, value } = action.payload;
+      state.users.entities[id].editable = value;
+    },
     updateUsersSelect: (state, action) => {
       const { ids, value } = action.payload;
       ids.forEach((id) => {

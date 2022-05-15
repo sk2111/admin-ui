@@ -1,44 +1,6 @@
-.table {
-  border-collapse: collapse;
-  width: 100%;
-}
-.table th {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: left;
-  padding-right: 1rem;
-}
-.table tr {
-  border-bottom: 1px solid var(--border-color-primary);
-  height: 6rem;
-}
-.table td {
-  font-size: 1.4rem;
-  text-transform: capitalize;
-  font-weight: 400;
-  padding-right: 1.5rem;
-}
-.minpad,
-.checkboxCol {
-  padding-left: 2rem;
-}
-.checkboxCol {
-  width: 20%;
-}
-.nameCol,
-.emailCol {
-  width: 30%;
-}
-.roleCol,
-.actionCol {
-  width: 10%;
-}
-.action {
-  cursor: pointer;
-  height: 2rem;
-  margin-right: 1.2rem;
-  width: 2rem;
-}
-.highlight {
-  background: var(--table-bg-primary);
+.bottom {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

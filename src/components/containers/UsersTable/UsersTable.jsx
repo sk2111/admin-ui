@@ -1,84 +1,77 @@
 //libs
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-//css
+//styles
 import styles from "./UsersTable.module.css";
 //components
-import CheckBox from "components/reusables/CheckBox/CheckBox";
-import RenderView from "components/reusables/RenderView/RenderView";
-//assests
-import editImgSrc from "assests/edit.png";
-import deleteImgSrc from "assests/delete.png";
-import saveImgSrc from "assests/save.png";
+import Table from "components/reusables/Table/Table";
+import Button from "components/reusables/Button/Button";
+import PaginationList from "components/reusables/PaginationList/PaginationList";
+//actions
+import { userActions } from "redux/userSlice";
+//selectors
+import { selectDeleteBtnActive } from "redux/userSlice";
+//constants
+import { buttonThemes } from "components/reusables/Button/Button";
 
-const UsersTable = ({
-  users,
-  allSelected,
-  handleUsersDelete,
-  handleUsersSelect,
-}) => {
+const { danger, dangerDisabled } = buttonThemes;
+
+const UsersTable = ({ users, currentPage }) => {
+  const dispatch = useDispatch();
+  const deleteBtnActive = useSelector(selectDeleteBtnActive);
+
+  const deleteBtnTheme = deleteBtnActive ? danger : dangerDisabled;
+
+  const handleUsersSelect = (ids, value) => {
+    dispatch(userActions.updateUsersSelect({ ids, value }));
+  };
+
+  const handleUsersEdit = (id, value) => {
+    dispatch(userActions.updateUsersEdit({ id, value }));
+  };
+
+  const handleUsersDelete = (usersToDelete) => {
+    dispatch(userActions.deleteUsers(usersToDelete));
+  };
+
+  const handleUsersDeleteInBulk = () => {
+    const usersToDelete = users.ids.filter((id) => users.entities[id].selected);
+    handleUsersDelete(usersToDelete);
+  };
+
+  const handlePageChange = (goToPage) => {
+    dispatch(userActions.updateCurrentPage(goToPage));
+  };
+
   return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          <th className={styles.checkboxCol}>
-            <CheckBox
-              checked={allSelected}
-              handleChange={(value) => handleUsersSelect(users.ids, value)}
-            />
-          </th>
-          <th className={styles.nameCol}>Name</th>
-          <th className={styles.emailCol}>Email</th>
-          <th className={styles.roleCol}>Role</th>
-          <th className={styles.actionCol}>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {users.ids.map((id) => {
-          const user = users.entities[id];
-          return (
-            <tr key={id} className={user.selected ? styles.highlight : null}>
-              <td className={styles.minpad}>
-                <CheckBox
-                  checked={user.selected}
-                  handleChange={(value) => handleUsersSelect([id], value)}
-                />
-              </td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
-              <td>
-                <RenderView renderIftrue={user.editable}>
-                  <img className={styles.action} src={saveImgSrc} alt="save" />
-                </RenderView>
-                <RenderView renderIftrue={!user.editable}>
-                  <img
-                    className={styles.action}
-                    src={editImgSrc}
-                    alt="edit"
-                    onClick={() => handleUsersDelete([id])}
-                  />
-                </RenderView>
-                <img
-                  className={styles.action}
-                  src={deleteImgSrc}
-                  alt="delete"
-                  onClick={() => handleUsersDelete([id])}
-                />
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <>
+      <Table
+        users={users}
+        allSelected={users.allSelected}
+        handleUsersEdit={handleUsersEdit}
+        handleUsersDelete={handleUsersDelete}
+        handleUsersSelect={handleUsersSelect}
+      />
+      <div className={styles.bottom}>
+        <Button
+          theme={deleteBtnTheme}
+          handleClick={() => handleUsersDeleteInBulk()}
+        >
+          Delete Selected
+        </Button>
+        <PaginationList
+          currentPage={currentPage}
+          totalPages={users.totalPages}
+          handlePageChange={handlePageChange}
+        />
+      </div>
+    </>
   );
 };
 
 UsersTable.propTypes = {
   users: PropTypes.object.isRequired,
-  allSelected: PropTypes.bool.isRequired,
-  handleUsersDelete: PropTypes.func.isRequired,
-  handleUsersSelect: PropTypes.func.isRequired,
 };
 
 export default UsersTable;
