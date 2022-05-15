@@ -68,6 +68,7 @@ const UsersTable = ({ users, currentPage }) => {
 
 UsersTable.propTypes = {
   users: PropTypes.object.isRequired,
+  currentPage: PropTypes.number.isRequired,
 };
 
 export default UsersTable;
