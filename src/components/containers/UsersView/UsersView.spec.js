@@ -4,12 +4,11 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import userEvent from "@testing-library/user-event";
 import { configureStore } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 //component
 import UsersView from "./UsersView";
 //redux
-import userReducer, { fetchUsers } from "redux/userSlice";
-import { userActions } from "redux/userSlice";
-import { act } from "react-dom/test-utils";
+import userReducer, { fetchUsers, userActions } from "redux/userSlice";
 //mock
 const getMockFetchUsers = () => {
   return [
