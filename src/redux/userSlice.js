@@ -64,9 +64,7 @@ export const userSlice = createSlice({
       usersToDelete.forEach((userToDelete) => {
         delete state.users.entities[userToDelete];
         const idx = state.users.ids.findIndex((id) => id === userToDelete);
-        if (idx !== -1) {
-          state.users.ids.splice(idx, 1);
-        }
+        state.users.ids.splice(idx, 1);
       });
     },
   },
