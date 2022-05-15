@@ -1,9 +1,22 @@
-import { redux } from "redux/mocks/mock.data";
-import userReducer, { userActions } from "redux/userSlice";
+import { app } from "config/constants";
+import { redux, mockFetchUsers } from "redux/mocks/mock.data";
+import { store } from "redux/store";
+import userReducer, {
+  userActions,
+  fetchUsers,
+  selectSearchTerm,
+  selectCurrentPage,
+  selectDeleteBtnActive,
+  selectDisplayUsers,
+} from "redux/userSlice";
 
 const { initialState, mockUsersState } = redux;
 
 describe("user reducer", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should handle initial state", () => {
     expect(userReducer(undefined, { type: "unknown" })).toEqual(initialState);
   });
@@ -41,5 +54,35 @@ describe("user reducer", () => {
     const actual = userReducer(mockUsersState, userActions.deleteUsers([1, 2]));
     expect(actual.users.ids.length).toEqual(0);
     expect(actual.users.entities).toEqual({});
+  });
+
+  it("Should fetch users and store in redux", async () => {
+    jest.spyOn(window, "fetch").mockImplementationOnce(() => {
+      return {
+        json: jest.fn().mockResolvedValue(mockFetchUsers),
+      };
+    });
+
+    await store.dispatch(fetchUsers());
+    const state = store.getState();
+    expect(state.user.users.ids).toStrictEqual([1, 2]);
+    expect(state.user.users.error).toBe("");
+  });
+
+  it("Should not fetch users and store error in redux", async () => {
+    jest.spyOn(window, "fetch").mockImplementationOnce(() => {
+      return {
+        json: jest.fn().mockRejectedValue("error"),
+      };
+    });
+
+    await store.dispatch(fetchUsers());
+    const state = store.getState();
+    expect(state.user.users.ids).toStrictEqual([1, 2]);
+    expect(state.user.users.error).toBe("error");
+  });
+
+  it("should return the search term selector", () => {
+    // console.log(selectSearchTerm(initialState));
   });
 });

@@ -138,7 +138,6 @@ export const redux = {
       entities: {},
     },
   },
-
   mockUsersState: {
     searchTerm: "",
     currentPage: 1,
@@ -165,3 +164,18 @@ export const redux = {
     },
   },
 };
+
+export const mockFetchUsers = [
+  {
+    id: 1,
+    name: "name1",
+    email: "email1",
+    role: "role1",
+  },
+  {
+    id: 2,
+    name: "name2",
+    email: "email2",
+    role: "role2",
+  },
+];

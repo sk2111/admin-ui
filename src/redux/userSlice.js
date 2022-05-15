@@ -114,6 +114,7 @@ export const selectDeleteBtnActive = createDraftSafeSelector(
     return ids.some((id) => entities[id].selected);
   },
 );
+
 export const selectDisplayUsers = createDraftSafeSelector(
   selectuser,
   ({ searchTerm, currentPage, users }) => {
