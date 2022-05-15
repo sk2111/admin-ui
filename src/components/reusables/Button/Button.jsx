@@ -4,6 +4,11 @@ import PropTypes from "prop-types";
 //css
 import styles from "./Button.module.css";
 
+export const buttonThemes = {
+  danger: "danger",
+  dangerDisabled: "dangerDisabled",
+};
+
 const Button = ({ children, theme, handleClick }) => {
   return (
     <button

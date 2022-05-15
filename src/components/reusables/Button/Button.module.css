@@ -4,3 +4,11 @@
 .button[data-theme="danger"] {
   background-color: var(--btn-bg-danger);
 }
+.button[data-theme="dangerDisabled"] {
+  background-color: var(--btn-bg-secondary);
+  border: 1px solid var(--btn-bg-danger);
+  color: var(--btn-bg-danger);
+  font-weight: 400;
+  pointer-events: none;
+  user-select: none;
+}
