@@ -52,7 +52,6 @@ const Table = ({
               <td>
                 <RenderView renderIftrue={user.editable}>
                   <img
-                    data-testid="save"
                     className={styles.action}
                     src={saveImgSrc}
                     alt="save"
@@ -61,7 +60,6 @@ const Table = ({
                 </RenderView>
                 <RenderView renderIftrue={!user.editable}>
                   <img
-                    data-testid="edit"
                     className={styles.action}
                     src={editImgSrc}
                     alt="edit"
@@ -69,7 +67,6 @@ const Table = ({
                   />
                 </RenderView>
                 <img
-                  data-testid="delete"
                   className={styles.action}
                   src={deleteImgSrc}
                   alt="delete"

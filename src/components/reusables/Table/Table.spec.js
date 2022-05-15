@@ -110,9 +110,9 @@ describe("Table", () => {
       />,
     );
 
-    const saveImgList = screen.queryAllByTestId("save");
-    const editImgList = screen.queryAllByTestId("edit");
-    const deleteImgList = screen.queryAllByTestId("delete");
+    const saveImgList = screen.queryAllByAltText("save");
+    const editImgList = screen.queryAllByAltText("edit");
+    const deleteImgList = screen.queryAllByAltText("delete");
 
     expect(saveImgList).not.toBeNull();
     expect(editImgList).not.toBeNull();
