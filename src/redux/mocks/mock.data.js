@@ -126,3 +126,42 @@ export const test = {
   currentPage: 1,
   totalPages: 2,
 };
+
+export const redux = {
+  initialState: {
+    searchTerm: "",
+    currentPage: 1,
+    users: {
+      loading: false,
+      error: "",
+      ids: [],
+      entities: {},
+    },
+  },
+
+  mockUsersState: {
+    searchTerm: "",
+    currentPage: 1,
+    users: {
+      loading: false,
+      error: "",
+      ids: [1, 2],
+      entities: {
+        1: {
+          name: "test-name",
+          email: "test-email",
+          role: "test-role",
+          editable: false,
+          selected: false,
+        },
+        2: {
+          name: "test-name2",
+          email: "test-email2",
+          role: "test-role2",
+          editable: false,
+          selected: false,
+        },
+      },
+    },
+  },
+};
