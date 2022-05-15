@@ -35,8 +35,8 @@ const UsersTable = ({
         {users.ids.map((id) => {
           const user = users.entities[id];
           return (
-            <tr key={id}>
-              <td>
+            <tr key={id} className={user.selected && styles.highlight}>
+              <td className={styles.minpad}>
                 <CheckBox
                   checked={user.selected}
                   handleChange={(value) => handleUsersSelect([id], value)}
