@@ -14,7 +14,7 @@ import saveImgSrc from "assests/save.png";
 const UsersTable = ({
   users,
   allSelected,
-  handleDelete,
+  handleUsersDelete,
   handleUsersSelect,
 }) => {
   return (
@@ -56,14 +56,14 @@ const UsersTable = ({
                     className={styles.action}
                     src={editImgSrc}
                     alt="edit"
-                    onClick={() => handleDelete([id])}
+                    onClick={() => handleUsersDelete([id])}
                   />
                 </RenderView>
                 <img
                   className={styles.action}
                   src={deleteImgSrc}
                   alt="delete"
-                  onClick={() => handleDelete([id])}
+                  onClick={() => handleUsersDelete([id])}
                 />
               </td>
             </tr>
@@ -76,7 +76,8 @@ const UsersTable = ({
 
 UsersTable.propTypes = {
   users: PropTypes.object.isRequired,
-  handleDelete: PropTypes.func.isRequired,
+  allSelected: PropTypes.bool.isRequired,
+  handleUsersDelete: PropTypes.func.isRequired,
   handleUsersSelect: PropTypes.func.isRequired,
 };
 

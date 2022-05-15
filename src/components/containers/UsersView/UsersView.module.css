@@ -1,0 +1,10 @@
+.middle {
+  margin: 1.2rem 0;
+  padding: 0 1rem;
+}
+.bottom {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
