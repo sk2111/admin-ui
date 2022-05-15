@@ -1,6 +1,6 @@
 //libs
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 //component
 import Table from "./Table";
@@ -12,12 +12,14 @@ describe("Table", () => {
     const handleUsersEdit = jest.fn();
     const handleUsersDelete = jest.fn();
     const handleUsersSelect = jest.fn();
+    const handleUsersSave = jest.fn();
 
     render(
       <Table
         users={mockUsers}
         allSelected={false}
         handleUsersEdit={handleUsersEdit}
+        handleUsersSave={handleUsersSave}
         handleUsersDelete={handleUsersDelete}
         handleUsersSelect={handleUsersSelect}
       />,
@@ -38,5 +40,97 @@ describe("Table", () => {
         mockUsers.entities[idx + 1].role,
       );
     });
+  });
+
+  it("should select all the users", async () => {
+    const handleUsersEdit = jest.fn();
+    const handleUsersDelete = jest.fn();
+    const handleUsersSelect = jest.fn();
+    const handleUsersSave = jest.fn();
+
+    render(
+      <Table
+        users={mockUsers}
+        allSelected={false}
+        handleUsersEdit={handleUsersEdit}
+        handleUsersSave={handleUsersSave}
+        handleUsersDelete={handleUsersDelete}
+        handleUsersSelect={handleUsersSelect}
+      />,
+    );
+
+    const [checkboxNode] = screen.getAllByRole("checkbox");
+    await userEvent.click(checkboxNode);
+
+    expect(handleUsersSelect).toBeCalledTimes(1);
+    expect(handleUsersSelect).toBeCalledWith(mockUsers.ids, true);
+  });
+
+  it("should select individual users", async () => {
+    const handleUsersEdit = jest.fn();
+    const handleUsersDelete = jest.fn();
+    const handleUsersSelect = jest.fn();
+    const handleUsersSave = jest.fn();
+
+    render(
+      <Table
+        users={mockUsers}
+        allSelected={false}
+        handleUsersEdit={handleUsersEdit}
+        handleUsersSave={handleUsersSave}
+        handleUsersDelete={handleUsersDelete}
+        handleUsersSelect={handleUsersSelect}
+      />,
+    );
+
+    const [checkboxNode, firstUserNode] = screen.getAllByRole("checkbox");
+    await userEvent.click(checkboxNode);
+
+    expect(handleUsersSelect).toBeCalledTimes(1);
+    expect(handleUsersSelect).lastCalledWith(mockUsers.ids, true);
+    await userEvent.click(firstUserNode);
+    expect(handleUsersSelect).toBeCalledTimes(2);
+    expect(handleUsersSelect).lastCalledWith([mockUsers.ids[0]], false);
+  });
+
+  it("should invoke edit, save, delete actions", async () => {
+    const handleUsersEdit = jest.fn();
+    const handleUsersDelete = jest.fn();
+    const handleUsersSelect = jest.fn();
+    const handleUsersSave = jest.fn();
+
+    render(
+      <Table
+        users={mockUsers}
+        allSelected={false}
+        handleUsersEdit={handleUsersEdit}
+        handleUsersSave={handleUsersSave}
+        handleUsersDelete={handleUsersDelete}
+        handleUsersSelect={handleUsersSelect}
+      />,
+    );
+
+    const saveImgList = screen.queryAllByTestId("save");
+    const editImgList = screen.queryAllByTestId("edit");
+    const deleteImgList = screen.queryAllByTestId("delete");
+
+    expect(saveImgList).not.toBeNull();
+    expect(editImgList).not.toBeNull();
+    expect(deleteImgList).not.toBeNull();
+
+    const [editImg] = editImgList;
+    const [saveImg] = saveImgList;
+    const [deleteImg] = deleteImgList;
+
+    await userEvent.click(editImg);
+    await userEvent.click(saveImg);
+    await userEvent.click(deleteImg);
+
+    expect(handleUsersEdit).toBeCalledTimes(1);
+    expect(handleUsersEdit).toBeCalledWith(2, true);
+    expect(handleUsersSave).toBeCalledTimes(1);
+    expect(handleUsersSave).toBeCalledWith(1, false);
+    expect(handleUsersDelete).toBeCalledTimes(1);
+    expect(handleUsersDelete).toBeCalledWith([1]);
   });
 });

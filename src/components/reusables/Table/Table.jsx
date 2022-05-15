@@ -15,6 +15,7 @@ const Table = ({
   users,
   allSelected,
   handleUsersEdit,
+  handleUsersSave,
   handleUsersDelete,
   handleUsersSelect,
 }) => {
@@ -45,20 +46,22 @@ const Table = ({
                   handleChange={(value) => handleUsersSelect([id], value)}
                 />
               </td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
+              <td data-testid="name">{user.name}</td>
+              <td data-testid="email">{user.email}</td>
+              <td data-testid="role">{user.role}</td>
               <td>
                 <RenderView renderIftrue={user.editable}>
                   <img
+                    data-testid="save"
                     className={styles.action}
                     src={saveImgSrc}
                     alt="save"
-                    onClick={() => handleUsersEdit(id, false)}
+                    onClick={() => handleUsersSave(id, false)}
                   />
                 </RenderView>
                 <RenderView renderIftrue={!user.editable}>
                   <img
+                    data-testid="edit"
                     className={styles.action}
                     src={editImgSrc}
                     alt="edit"
@@ -66,6 +69,7 @@ const Table = ({
                   />
                 </RenderView>
                 <img
+                  data-testid="delete"
                   className={styles.action}
                   src={deleteImgSrc}
                   alt="delete"
