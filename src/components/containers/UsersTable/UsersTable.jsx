@@ -5,9 +5,11 @@ import PropTypes from "prop-types";
 import styles from "./UsersTable.module.css";
 //components
 import CheckBox from "components/reusables/CheckBox/CheckBox";
+import RenderView from "components/reusables/RenderView/RenderView";
 //assests
 import editImgSrc from "assests/edit.png";
 import deleteImgSrc from "assests/delete.png";
+import saveImgSrc from "assests/save.png";
 
 const UsersTable = ({
   users,
@@ -35,7 +37,7 @@ const UsersTable = ({
         {users.ids.map((id) => {
           const user = users.entities[id];
           return (
-            <tr key={id} className={user.selected && styles.highlight}>
+            <tr key={id} className={user.selected ? styles.highlight : null}>
               <td className={styles.minpad}>
                 <CheckBox
                   checked={user.selected}
@@ -46,7 +48,17 @@ const UsersTable = ({
               <td>{user.email}</td>
               <td>{user.role}</td>
               <td>
-                <img className={styles.action} src={editImgSrc} alt="edit" />
+                <RenderView renderIftrue={user.editable}>
+                  <img className={styles.action} src={saveImgSrc} alt="save" />
+                </RenderView>
+                <RenderView renderIftrue={!user.editable}>
+                  <img
+                    className={styles.action}
+                    src={editImgSrc}
+                    alt="edit"
+                    onClick={() => handleDelete([id])}
+                  />
+                </RenderView>
                 <img
                   className={styles.action}
                   src={deleteImgSrc}
