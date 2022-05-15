@@ -35,10 +35,8 @@ describe("Table", () => {
     emailNodeList.forEach((emailNode, idx) => {
       expect(emailNode.textContent).toEqual(mockUsers.entities[idx + 1].email);
     });
-    roleNodeList.forEach((roleNodeList, idx) => {
-      expect(roleNodeList.textContent).toEqual(
-        mockUsers.entities[idx + 1].role,
-      );
+    roleNodeList.forEach((roleNode, idx) => {
+      expect(roleNode.textContent).toEqual(mockUsers.entities[idx + 1].role);
     });
   });
 
