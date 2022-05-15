@@ -116,8 +116,6 @@ export const selectDeleteBtnActive = createDraftSafeSelector(
 export const selectDisplayUsers = createDraftSafeSelector(
   selectuser,
   ({ searchTerm, currentPage, users }) => {
-    return {
-      ...getDisplayUsers(currentPage, getFilteredUsers(searchTerm, users)),
-    };
+    return getDisplayUsers(currentPage, getFilteredUsers(searchTerm, users));
   },
 );
