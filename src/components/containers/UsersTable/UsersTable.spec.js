@@ -7,8 +7,7 @@ import { configureStore } from "@reduxjs/toolkit";
 //component
 import UsersTable from "./UsersTable";
 //redux
-import userReducer from "redux/userSlice";
-import { fetchUsers } from "redux/userSlice";
+import userReducer, { fetchUsers } from "redux/userSlice";
 //mock data
 import { mockUsersTableProps, getMockFetchUsers } from "./mock.data";
 
@@ -90,7 +89,6 @@ describe("UsersTable", () => {
     const paginationNode = screen.getByText(secondPage);
     await userEvent.click(paginationNode);
     const { user } = store.getState();
-    console.log(user);
     expect(user.currentPage).toBe(secondPage);
   });
 });
