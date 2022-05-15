@@ -7,15 +7,14 @@ import styles from "./UsersView.module.css";
 import SearchBar from "components/reusables/SearchBar/SearchBar";
 import UsersTable from "components/containers/UsersTable/UsersTable";
 import RenderView from "components/reusables/RenderView/RenderView";
-//actions
-import { userActions } from "redux/userSlice";
-//selectors
+//redux
 import {
+  userActions,
   selectSearchTerm,
   selectCurrentPage,
   selectDisplayUsers,
 } from "redux/userSlice";
-//
+//constants
 import { app } from "config/constants";
 
 const UsersView = () => {

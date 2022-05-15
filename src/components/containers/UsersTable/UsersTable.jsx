@@ -6,14 +6,10 @@ import PropTypes from "prop-types";
 import styles from "./UsersTable.module.css";
 //components
 import Table from "components/reusables/Table/Table";
-import Button from "components/reusables/Button/Button";
+import Button, { buttonThemes } from "components/reusables/Button/Button";
 import PaginationList from "components/reusables/PaginationList/PaginationList";
-//actions
-import { userActions } from "redux/userSlice";
-//selectors
-import { selectDeleteBtnActive } from "redux/userSlice";
-//constants
-import { buttonThemes } from "components/reusables/Button/Button";
+//redux
+import { userActions, selectDeleteBtnActive } from "redux/userSlice";
 
 const { danger, dangerDisabled } = buttonThemes;
 
