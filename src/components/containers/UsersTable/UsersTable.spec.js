@@ -46,6 +46,8 @@ describe("UsersTable", () => {
   });
 
   it("should invoke the delete action selected id", async () => {
+    const expectedMatch = [2];
+
     render(
       <Provider store={store}>
         <UsersTable users={mockUsersTableProps} currentPage={1} />
@@ -53,9 +55,12 @@ describe("UsersTable", () => {
     );
     await store.dispatch(fetchUsers());
     const [deleteNode] = screen.getAllByAltText("delete");
+    const bulkDelete = screen.getByText(/delete selected/i);
     await userEvent.click(deleteNode);
+    await userEvent.click(bulkDelete);
     const { user } = store.getState();
-    expect(user.users.ids).toStrictEqual([2]);
+    expect(user.users.ids).toStrictEqual(expectedMatch);
+    expect(user.users.ids).toStrictEqual(expectedMatch);
   });
 
   it("should invoke the edit action with selected id", async () => {
@@ -71,5 +76,21 @@ describe("UsersTable", () => {
     const { user } = store.getState();
     const [id] = user.users.ids;
     expect(user.users.entities[id].editable).toBe(true);
+  });
+
+  it("should invoke page change on pagination item click", async () => {
+    const secondPage = 2;
+
+    render(
+      <Provider store={store}>
+        <UsersTable users={mockUsersTableProps} currentPage={1} />
+      </Provider>,
+    );
+
+    const paginationNode = screen.getByText(secondPage);
+    await userEvent.click(paginationNode);
+    const { user } = store.getState();
+    console.log(user);
+    expect(user.currentPage).toBe(secondPage);
   });
 });
