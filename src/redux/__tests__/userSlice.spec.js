@@ -1,14 +1,6 @@
-import { app } from "config/constants";
 import { redux, mockFetchUsers } from "redux/mocks/mock.data";
 import { store } from "redux/store";
-import userReducer, {
-  userActions,
-  fetchUsers,
-  selectSearchTerm,
-  selectCurrentPage,
-  selectDeleteBtnActive,
-  selectDisplayUsers,
-} from "redux/userSlice";
+import userReducer, { userActions, fetchUsers } from "redux/userSlice";
 
 const { initialState, mockUsersState } = redux;
 
