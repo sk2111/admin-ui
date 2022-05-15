@@ -73,8 +73,4 @@ describe("user reducer", () => {
     expect(state.user.users.ids).toStrictEqual([1, 2]);
     expect(state.user.users.error).toBe("error");
   });
-
-  it("should return the search term selector", () => {
-    // console.log(selectSearchTerm(initialState));
-  });
 });
