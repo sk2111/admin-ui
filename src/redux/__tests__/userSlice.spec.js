@@ -28,22 +28,43 @@ describe("user reducer", () => {
 
   it("should handle users edit", () => {
     const actual = userReducer(
-      mockUsersState,
+      mockUsersState(),
       userActions.updateUserEdit({ id: 1, value: true }),
     );
     expect(actual.users.entities[1].editable).toEqual(true);
   });
 
+  it("should handle users save", () => {
+    const userId = 1;
+    const actual = userReducer(
+      mockUsersState(),
+      userActions.updateUserSave({
+        id: userId,
+        value: false,
+        name: "name",
+        email: "email",
+        role: "role",
+      }),
+    );
+    expect(actual.users.entities[userId].editable).toEqual(false);
+    expect(actual.users.entities[userId].name).toEqual("name");
+    expect(actual.users.entities[userId].email).toEqual("email");
+    expect(actual.users.entities[userId].role).toEqual("role");
+  });
+
   it("should handle users select", () => {
     const actual = userReducer(
-      mockUsersState,
+      mockUsersState(),
       userActions.updateUsersSelect({ ids: [1], value: true }),
     );
     expect(actual.users.entities[1].selected).toEqual(true);
   });
 
   it("should handle delete users", () => {
-    const actual = userReducer(mockUsersState, userActions.deleteUsers([1, 2]));
+    const actual = userReducer(
+      mockUsersState(),
+      userActions.deleteUsers([1, 2]),
+    );
     expect(actual.users.ids.length).toEqual(0);
     expect(actual.users.entities).toEqual({});
   });

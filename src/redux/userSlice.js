@@ -54,8 +54,11 @@ export const userSlice = createSlice({
       state.users.entities[id].editable = value;
     },
     updateUserSave: (state, action) => {
-      const { id, value } = action.payload;
+      const { id, value, name, email, role } = action.payload;
       state.users.entities[id].editable = value;
+      state.users.entities[id].name = name;
+      state.users.entities[id].email = email;
+      state.users.entities[id].role = role;
     },
     updateUsersSelect: (state, action) => {
       const { ids, value } = action.payload;
