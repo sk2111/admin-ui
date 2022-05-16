@@ -23,8 +23,12 @@ const UsersTable = ({ users, currentPage }) => {
     dispatch(userActions.updateUsersSelect({ ids, value }));
   };
 
-  const handleUsersEdit = (id, value) => {
-    dispatch(userActions.updateUsersEdit({ id, value }));
+  const handleUserEdit = (id, value) => {
+    dispatch(userActions.updateUserEdit({ id, value }));
+  };
+
+  const handleUserSave = (id, value) => {
+    dispatch(userActions.updateUserEdit({ id, value }));
   };
 
   const handleUsersDelete = (usersToDelete) => {
@@ -45,7 +49,8 @@ const UsersTable = ({ users, currentPage }) => {
       <Table
         users={users}
         allSelected={users.allSelected}
-        handleUsersEdit={handleUsersEdit}
+        handleUserEdit={handleUserEdit}
+        handleUserSave={handleUserSave}
         handleUsersDelete={handleUsersDelete}
         handleUsersSelect={handleUsersSelect}
       />

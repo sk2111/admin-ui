@@ -9,17 +9,17 @@ import { mockUsers } from "redux/mocks/mock.data";
 
 describe("Table", () => {
   it("should render the table with user info", () => {
-    const handleUsersEdit = jest.fn();
+    const handleUserEdit = jest.fn();
     const handleUsersDelete = jest.fn();
     const handleUsersSelect = jest.fn();
-    const handleUsersSave = jest.fn();
+    const handleUserSave = jest.fn();
 
     render(
       <Table
         users={mockUsers}
         allSelected={false}
-        handleUsersEdit={handleUsersEdit}
-        handleUsersSave={handleUsersSave}
+        handleUserEdit={handleUserEdit}
+        handleUserSave={handleUserSave}
         handleUsersDelete={handleUsersDelete}
         handleUsersSelect={handleUsersSelect}
       />,
@@ -41,17 +41,17 @@ describe("Table", () => {
   });
 
   it("should select all the users", async () => {
-    const handleUsersEdit = jest.fn();
+    const handleUserEdit = jest.fn();
     const handleUsersDelete = jest.fn();
     const handleUsersSelect = jest.fn();
-    const handleUsersSave = jest.fn();
+    const handleUserSave = jest.fn();
 
     render(
       <Table
         users={mockUsers}
         allSelected={false}
-        handleUsersEdit={handleUsersEdit}
-        handleUsersSave={handleUsersSave}
+        handleUserEdit={handleUserEdit}
+        handleUserSave={handleUserSave}
         handleUsersDelete={handleUsersDelete}
         handleUsersSelect={handleUsersSelect}
       />,
@@ -65,17 +65,17 @@ describe("Table", () => {
   });
 
   it("should select individual users", async () => {
-    const handleUsersEdit = jest.fn();
+    const handleUserEdit = jest.fn();
     const handleUsersDelete = jest.fn();
     const handleUsersSelect = jest.fn();
-    const handleUsersSave = jest.fn();
+    const handleUserSave = jest.fn();
 
     render(
       <Table
         users={mockUsers}
         allSelected={false}
-        handleUsersEdit={handleUsersEdit}
-        handleUsersSave={handleUsersSave}
+        handleUserEdit={handleUserEdit}
+        handleUserSave={handleUserSave}
         handleUsersDelete={handleUsersDelete}
         handleUsersSelect={handleUsersSelect}
       />,
@@ -92,17 +92,17 @@ describe("Table", () => {
   });
 
   it("should invoke edit, save, delete actions", async () => {
-    const handleUsersEdit = jest.fn();
+    const handleUserEdit = jest.fn();
     const handleUsersDelete = jest.fn();
     const handleUsersSelect = jest.fn();
-    const handleUsersSave = jest.fn();
+    const handleUserSave = jest.fn();
 
     render(
       <Table
         users={mockUsers}
         allSelected={false}
-        handleUsersEdit={handleUsersEdit}
-        handleUsersSave={handleUsersSave}
+        handleUserEdit={handleUserEdit}
+        handleUserSave={handleUserSave}
         handleUsersDelete={handleUsersDelete}
         handleUsersSelect={handleUsersSelect}
       />,
@@ -124,10 +124,10 @@ describe("Table", () => {
     await userEvent.click(saveImg);
     await userEvent.click(deleteImg);
 
-    expect(handleUsersEdit).toBeCalledTimes(1);
-    expect(handleUsersEdit).toBeCalledWith(2, true);
-    expect(handleUsersSave).toBeCalledTimes(1);
-    expect(handleUsersSave).toBeCalledWith(1, false);
+    expect(handleUserEdit).toBeCalledTimes(1);
+    expect(handleUserEdit).toBeCalledWith(2, true);
+    expect(handleUserSave).toBeCalledTimes(1);
+    expect(handleUserSave).toBeCalledWith(1, false);
     expect(handleUsersDelete).toBeCalledTimes(1);
     expect(handleUsersDelete).toBeCalledWith([1]);
   });

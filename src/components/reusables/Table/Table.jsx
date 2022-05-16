@@ -14,8 +14,8 @@ import saveImgSrc from "assests/save.png";
 const Table = ({
   users,
   allSelected,
-  handleUsersEdit,
-  handleUsersSave,
+  handleUserEdit,
+  handleUserSave,
   handleUsersDelete,
   handleUsersSelect,
 }) => {
@@ -55,7 +55,7 @@ const Table = ({
                     className={styles.action}
                     src={saveImgSrc}
                     alt="save"
-                    onClick={() => handleUsersSave(id, false)}
+                    onClick={() => handleUserSave(id, false)}
                   />
                 </RenderView>
                 <RenderView renderIftrue={!user.editable}>
@@ -63,7 +63,7 @@ const Table = ({
                     className={styles.action}
                     src={editImgSrc}
                     alt="edit"
-                    onClick={() => handleUsersEdit(id, true)}
+                    onClick={() => handleUserEdit(id, true)}
                   />
                 </RenderView>
                 <img
@@ -84,7 +84,7 @@ const Table = ({
 Table.propTypes = {
   users: PropTypes.object.isRequired,
   allSelected: PropTypes.bool.isRequired,
-  handleUsersEdit: PropTypes.func.isRequired,
+  handleUserEdit: PropTypes.func.isRequired,
   handleUsersDelete: PropTypes.func.isRequired,
   handleUsersSelect: PropTypes.func.isRequired,
 };

@@ -29,7 +29,7 @@ describe("user reducer", () => {
   it("should handle users edit", () => {
     const actual = userReducer(
       mockUsersState,
-      userActions.updateUsersEdit({ id: 1, value: true }),
+      userActions.updateUserEdit({ id: 1, value: true }),
     );
     expect(actual.users.entities[1].editable).toEqual(true);
   });
