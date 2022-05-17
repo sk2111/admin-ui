@@ -9,6 +9,7 @@ import { mockUsers } from "redux/mocks/mock.data";
 
 describe("Table", () => {
   it("should render the table with user info", () => {
+    const offsetIdx = 2;
     const handleUserEdit = jest.fn();
     const handleUsersDelete = jest.fn();
     const handleUsersSelect = jest.fn();
@@ -25,18 +26,28 @@ describe("Table", () => {
       />,
     );
 
-    const nameNodeList = screen.getAllByTestId("name");
-    const emailNodeList = screen.getAllByTestId("email");
-    const roleNodeList = screen.getAllByTestId("role");
+    const [firstNameNode, ...nameNodeList] = screen.getAllByTestId("name");
+    const [firstEmailNode, ...emailNodeList] = screen.getAllByTestId("email");
+    const [firstRoleNode, ...roleNodeList] = screen.getAllByTestId("role");
+
+    expect(firstNameNode).not.toBeNull();
+    expect(firstEmailNode).not.toBeNull();
+    expect(firstRoleNode).not.toBeNull();
 
     nameNodeList.forEach((nameNode, idx) => {
-      expect(nameNode.textContent).toEqual(mockUsers.entities[idx + 1].name);
+      expect(nameNode.textContent).toEqual(
+        mockUsers.entities[idx + offsetIdx].name,
+      );
     });
     emailNodeList.forEach((emailNode, idx) => {
-      expect(emailNode.textContent).toEqual(mockUsers.entities[idx + 1].email);
+      expect(emailNode.textContent).toEqual(
+        mockUsers.entities[idx + offsetIdx].email,
+      );
     });
     roleNodeList.forEach((roleNode, idx) => {
-      expect(roleNode.textContent).toEqual(mockUsers.entities[idx + 1].role);
+      expect(roleNode.textContent).toEqual(
+        mockUsers.entities[idx + offsetIdx].role,
+      );
     });
   });
 
@@ -91,7 +102,7 @@ describe("Table", () => {
     expect(handleUsersSelect).lastCalledWith([mockUsers.ids[0]], false);
   });
 
-  it("should invoke edit, save, delete actions", async () => {
+  it("should invoke edit, save, cancel, delete actions", async () => {
     const handleUserEdit = jest.fn();
     const handleUsersDelete = jest.fn();
     const handleUsersSelect = jest.fn();
@@ -110,15 +121,18 @@ describe("Table", () => {
 
     const saveImgList = screen.queryAllByAltText("save");
     const editImgList = screen.queryAllByAltText("edit");
+    const cancelImgList = screen.queryAllByAltText("cancel");
     const deleteImgList = screen.queryAllByAltText("delete");
 
     expect(saveImgList).not.toBeNull();
     expect(editImgList).not.toBeNull();
     expect(deleteImgList).not.toBeNull();
+    expect(cancelImgList).not.toBeNull();
 
     const [editImg] = editImgList;
     const [saveImg] = saveImgList;
     const [deleteImg] = deleteImgList;
+    const [cancelImg] = cancelImgList;
 
     await userEvent.click(editImg);
     await userEvent.click(saveImg);
@@ -127,8 +141,18 @@ describe("Table", () => {
     expect(handleUserEdit).toBeCalledTimes(1);
     expect(handleUserEdit).toBeCalledWith(2, true);
     expect(handleUserSave).toBeCalledTimes(1);
-    expect(handleUserSave).toBeCalledWith(1, false);
+    expect(handleUserSave).toBeCalledWith({
+      email: "aaron@mailinator.com",
+      id: 1,
+      name: "Aaron Miles",
+      role: "member",
+      value: false,
+    });
     expect(handleUsersDelete).toBeCalledTimes(1);
     expect(handleUsersDelete).toBeCalledWith([1]);
+
+    await userEvent.click(cancelImg);
+    expect(handleUserEdit).toBeCalledTimes(2);
+    expect(handleUserEdit).toBeCalledWith(1, false);
   });
 });

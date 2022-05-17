@@ -1,15 +1,17 @@
 //libs
-import React from "react";
+import React, { createRef, useRef } from "react";
 import PropTypes from "prop-types";
 //css
 import styles from "./Table.module.css";
 //components
 import CheckBox from "components/reusables/CheckBox/CheckBox";
 import RenderView from "components/reusables/RenderView/RenderView";
+import EditableInput from "../EditableInput/EditableInput";
 //assests
 import editImgSrc from "assests/edit.png";
 import deleteImgSrc from "assests/delete.png";
 import saveImgSrc from "assests/save.png";
+import cancelImgSrc from "assests/cancel.png";
 
 const Table = ({
   users,
@@ -19,6 +21,10 @@ const Table = ({
   handleUsersDelete,
   handleUsersSelect,
 }) => {
+  const nameRefs = useRef({});
+  const emailRefs = useRef({});
+  const roleRefs = useRef({});
+
   return (
     <table className={styles.table}>
       <thead>
@@ -37,28 +43,64 @@ const Table = ({
       </thead>
       <tbody>
         {users.ids.map((id) => {
-          const user = users.entities[id];
+          const { selected, name, email, role, editable } = users.entities[id];
+          nameRefs.current[id] = nameRefs.current[id] ?? createRef();
+          emailRefs.current[id] = emailRefs.current[id] ?? createRef();
+          roleRefs.current[id] = roleRefs.current[id] ?? createRef();
+
           return (
-            <tr key={id} className={user.selected ? styles.highlight : null}>
+            <tr key={id} className={selected ? styles.highlight : null}>
               <td className={styles.minpad}>
                 <CheckBox
-                  checked={user.selected}
+                  checked={selected}
                   handleChange={(value) => handleUsersSelect([id], value)}
                 />
               </td>
-              <td data-testid="name">{user.name}</td>
-              <td data-testid="email">{user.email}</td>
-              <td data-testid="role">{user.role}</td>
+              <td data-testid="name">
+                <EditableInput
+                  ref={nameRefs.current[id]}
+                  editable={editable}
+                  value={name}
+                />
+              </td>
+              <td data-testid="email">
+                <EditableInput
+                  ref={emailRefs.current[id]}
+                  editable={editable}
+                  value={email}
+                />
+              </td>
+              <td data-testid="role">
+                <EditableInput
+                  ref={roleRefs.current[id]}
+                  editable={editable}
+                  value={role}
+                />
+              </td>
               <td>
-                <RenderView renderIftrue={user.editable}>
+                <RenderView renderIftrue={editable}>
                   <img
                     className={styles.action}
                     src={saveImgSrc}
                     alt="save"
-                    onClick={() => handleUserSave(id, false)}
+                    onClick={() =>
+                      handleUserSave({
+                        id,
+                        value: false,
+                        name: nameRefs.current[id].current.value,
+                        email: emailRefs.current[id].current.value,
+                        role: roleRefs.current[id].current.value,
+                      })
+                    }
+                  />
+                  <img
+                    className={styles.action}
+                    src={cancelImgSrc}
+                    alt="cancel"
+                    onClick={() => handleUserEdit(id, false)}
                   />
                 </RenderView>
-                <RenderView renderIftrue={!user.editable}>
+                <RenderView renderIftrue={!editable}>
                   <img
                     className={styles.action}
                     src={editImgSrc}
