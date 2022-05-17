@@ -27,8 +27,8 @@ const UsersTable = ({ users, currentPage }) => {
     dispatch(userActions.updateUserEdit({ id, value }));
   };
 
-  const handleUserSave = (id, value) => {
-    dispatch(userActions.updateUserEdit({ id, value }));
+  const handleUserSave = (saveInfo) => {
+    dispatch(userActions.updateUserSave(saveInfo));
   };
 
   const handleUsersDelete = (usersToDelete) => {
