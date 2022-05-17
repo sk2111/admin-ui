@@ -24,11 +24,17 @@ const getMockFetchUsers = () => {
       email: "aishwarya@mailinator.com",
       role: "member",
     },
+    {
+      id: 3,
+      name: "Mani salamon",
+      email: "manisalamon@mailinator.com",
+      role: "member",
+    },
   ];
 };
 
 const mockUsersTableProps = {
-  ids: [1, 2],
+  ids: [1, 2, 3],
   entities: {
     1: {
       id: 1,
@@ -44,6 +50,14 @@ const mockUsersTableProps = {
       email: "aishwarya@mailinator.com",
       role: "member",
       editable: false,
+      selected: false,
+    },
+    3: {
+      id: 3,
+      name: "Mani salamon",
+      email: "manisalamon@mailinator.com",
+      role: "member",
+      editable: true,
       selected: false,
     },
   },
@@ -85,7 +99,7 @@ describe("UsersTable", () => {
   });
 
   it("should invoke the delete action selected id", async () => {
-    const expectedMatch = [2];
+    const expectedMatch = [2, 3];
 
     render(
       <Provider store={store}>
@@ -115,6 +129,23 @@ describe("UsersTable", () => {
     const { user } = store.getState();
     const [id] = user.users.ids;
     expect(user.users.entities[id].editable).toBe(true);
+  });
+
+  it("should invoke the save action with payload", async () => {
+    render(
+      <Provider store={store}>
+        <UsersTable users={mockUsersTableProps} currentPage={1} />
+      </Provider>,
+    );
+
+    await store.dispatch(fetchUsers());
+    const [editNode] = screen.getAllByAltText("edit");
+    await userEvent.click(editNode);
+    const saveNode = await screen.findByAltText("save");
+    await userEvent.click(saveNode);
+    const { user } = store.getState();
+    const id = user.users.ids[user.users.ids.length - 1];
+    expect(user.users.entities[id].editable).toBe(false);
   });
 
   it("should invoke page change on pagination item click", async () => {
