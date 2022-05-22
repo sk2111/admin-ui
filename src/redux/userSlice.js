@@ -11,6 +11,7 @@ import { getDisplayUsers, getFilteredUsers } from "./helpers";
 const initialState = {
   searchTerm: "",
   currentPage: 1,
+  toastMessage: "",
   users: {
     loading: false,
     error: "",
@@ -74,6 +75,9 @@ export const userSlice = createSlice({
         state.users.ids.splice(idx, 1);
       });
     },
+    updateToastMessage: (state, action) => {
+      state.toastMessage = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -124,5 +128,12 @@ export const selectDisplayUsers = createDraftSafeSelector(
   selectuser,
   ({ searchTerm, currentPage, users }) => {
     return getDisplayUsers(currentPage, getFilteredUsers(searchTerm, users));
+  },
+);
+
+export const selectToastMessage = createDraftSafeSelector(
+  selectuser,
+  (state) => {
+    return state.toastMessage;
   },
 );

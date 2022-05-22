@@ -7,12 +7,14 @@ import styles from "./UsersView.module.css";
 import SearchBar from "components/reusables/SearchBar/SearchBar";
 import UsersTable from "components/containers/UsersTable/UsersTable";
 import RenderView from "components/reusables/RenderView/RenderView";
+import ToastMessage from "components/reusables/ToastMessage/ToastMessage";
 //redux
 import {
   userActions,
   selectSearchTerm,
   selectCurrentPage,
   selectDisplayUsers,
+  selectToastMessage,
 } from "redux/userSlice";
 //constants
 import { app } from "config/constants";
@@ -22,6 +24,7 @@ const UsersView = () => {
   const searchTerm = useSelector(selectSearchTerm);
   const currentPage = useSelector(selectCurrentPage);
   const users = useSelector(selectDisplayUsers);
+  const toastMessage = useSelector(selectToastMessage);
 
   useEffect(() => {
     if (users.totalPages && currentPage > users.totalPages) {
@@ -31,6 +34,10 @@ const UsersView = () => {
 
   const handleSearchTermChange = (value) => {
     dispatch(userActions.updateSearchTerm(value));
+  };
+
+  const updateToastMessage = (message) => {
+    dispatch(userActions.updateToastMessage(message));
   };
 
   return (
@@ -48,6 +55,13 @@ const UsersView = () => {
         <div className={styles.middle}>
           <UsersTable users={users} currentPage={currentPage} />
         </div>
+      </RenderView>
+      <RenderView renderIftrue={toastMessage}>
+        <ToastMessage
+          message={toastMessage}
+          clearAfterMs={app.toastDurationInMs}
+          updateToastMessage={updateToastMessage}
+        />
       </RenderView>
     </section>
   );

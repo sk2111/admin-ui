@@ -14,6 +14,8 @@
   --btn-bg-danger: #e11d00;
   --btn-bg-disabled: #767676;
   --table-bg-primary: #e3e3e3;
+  --error-info-text: #e11d00;
+  --toast-bg-primary: #000000;
 }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

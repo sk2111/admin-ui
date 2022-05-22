@@ -131,6 +131,7 @@ export const redux = {
   initialState: {
     searchTerm: "",
     currentPage: 1,
+    toastMessage: "",
     users: {
       loading: false,
       error: "",

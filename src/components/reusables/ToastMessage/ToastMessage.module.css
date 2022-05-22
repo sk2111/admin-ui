@@ -1,0 +1,10 @@
+.toast {
+  background-color: var(--toast-bg-primary);
+  border-radius: 1rem;
+  color: var(--text-color-primary);
+  font-size: 1.4rem;
+  padding: 1.5rem;
+  position: fixed;
+  right: 3rem;
+  top: 5%;
+}

@@ -10,6 +10,8 @@ import Button, { buttonThemes } from "components/reusables/Button/Button";
 import PaginationList from "components/reusables/PaginationList/PaginationList";
 //redux
 import { userActions, selectDeleteBtnActive } from "redux/userSlice";
+//constants
+import { app } from "config/constants";
 
 const { danger, dangerDisabled } = buttonThemes;
 
@@ -28,7 +30,11 @@ const UsersTable = ({ users, currentPage }) => {
   };
 
   const handleUserSave = (saveInfo) => {
-    dispatch(userActions.updateUserSave(saveInfo));
+    const { email, name, role } = saveInfo;
+    if (email.trim() && name.trim() && role.trim()) {
+      return dispatch(userActions.updateUserSave(saveInfo));
+    }
+    dispatch(userActions.updateToastMessage(app.emptyFieldError));
   };
 
   const handleUsersDelete = (usersToDelete) => {
