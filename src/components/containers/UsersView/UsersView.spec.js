@@ -92,4 +92,24 @@ describe("UsersView", () => {
       { timeout: 2000 },
     );
   });
+
+  it("should clear the toast message", async () => {
+    render(
+      <Provider store={store}>
+        <UsersView />
+      </Provider>,
+    );
+
+    await act(async () => {
+      await store.dispatch(userActions.updateToastMessage("Invalid field"));
+    });
+
+    await waitFor(
+      function () {
+        const { user } = store.getState();
+        return expect(user.toastMessage).toBe("");
+      },
+      { timeout: 5000 },
+    );
+  });
 });
