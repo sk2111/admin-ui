@@ -69,6 +69,15 @@ describe("user reducer", () => {
     expect(actual.users.entities).toEqual({});
   });
 
+  it("should update toast message", () => {
+    const message = "Invalid field";
+    const actual = userReducer(
+      mockUsersState(),
+      userActions.updateToastMessage(message),
+    );
+    expect(actual.toastMessage).toEqual(message);
+  });
+
   it("Should fetch users and store in redux", async () => {
     jest.spyOn(window, "fetch").mockImplementationOnce(() => {
       return {

@@ -143,6 +143,7 @@ export const redux = {
     return {
       searchTerm: "",
       currentPage: 1,
+      toastMessage: "",
       users: {
         loading: false,
         error: "",

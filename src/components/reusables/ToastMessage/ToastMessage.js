@@ -7,12 +7,10 @@ import styles from "./ToastMessage.module.css";
 const ToastMessage = ({ message, clearAfterMs, updateToastMessage }) => {
   useEffect(() => {
     const timerId = setTimeout(() => {
-      if (message.trim()) {
-        updateToastMessage("");
-      }
+      updateToastMessage("");
     }, clearAfterMs);
     return () => clearTimeout(timerId);
-  }, [message, clearAfterMs, updateToastMessage]);
+  }, [clearAfterMs, updateToastMessage]);
 
   return <p className={styles.toast}>{message}</p>;
 };
